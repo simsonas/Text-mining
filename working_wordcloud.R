@@ -11,7 +11,7 @@ setwd ("c:/sentiment")
 
 mach_text = readLines("test.txt")
 
-
+#kazka padariau dfafasdfaf
 
 mach_text = reviews
 
