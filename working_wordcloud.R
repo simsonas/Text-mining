@@ -12,7 +12,7 @@ setwd ("c:/sentiment")
 mach_text = readLines("test.txt")
 
 #kazka padariau dfafasdfaf
-
+#hello world
 mach_text = reviews
 
 # create a corpus
