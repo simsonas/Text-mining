@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#library(twitteR)\nlibrary(NLP)\nlibrary(tm)\nlibrary(RColorBrewer)\nlibrary(wordcloud)\n\n\nlibrary(ggplot2)\n\nsetwd (\"c:/sentiment\")\n\nmach_text = readLines(\"test.txt\")\n\n#kazka padariau dfafasdfaf\n\nmach_text = reviews\n\n# create a corpus\nmach_corpus = Corpus(VectorSource(mach_text))\n\n# create document term matrix applying some transformations\ntdm = TermDocumentMatrix(mach_corpus,\n                         control = list(removePunctuation = TRUE,\n                                        #stopwords = c(\"draudimas\", \"kad\",\"tai\", stopwords(\"english\")),\n                                        stopwords1 = c(stopw,\"draudime\", \"dabar\", \"tada\", \"tikrai\", \"draudimas\", \"draudimo\", \"buvo\", \"lietuvos\", \"jie\", \"jau\", \"draudimu\", \"cia\", \"yra\", \"draudima\", \"reikia\", \"metu\", \"nieko\"),\n                                        removeNumbers = TRUE, tolower = TRUE))\n# define tdm as matrix\nm = as.matrix(tdm)\n# get word counts in decreasing order\nword_freqs = sort(rowSums(m), decreasing=TRUE) \n# create a data frame with words and their frequencies\ndm = data.frame(word=names(word_freqs), freq=word_freqs)\n\ncolorPalette <- brewer.pal(8, \"RdBu\")\n\n\n# plot wordcloud\nwordcloud(dm$word, dm$freq, random.order=FALSE, min.freq=3, rot.per=0.2, scale=c(3, .2), colors=brewer.pal(8, \"RdBu\"))\n\n# save the image in png format\npng(\"draudimas.png\", width=12, height=8, units=\"in\", res=300, bg=\"black\")\nwordcloud(dm$word, dm$freq, random.order=FALSE, min.freq=3, rot.per=0.2, scale=c(3, .2), colors=brewer.pal(8, \"RdBu\"))\n#wordcloud(dm$word, dm$freq, random.order=FALSE, colors=brewer.pal(8, \"Dark2\"))\n\ndev.off()\n",
+    "created" : 1486065330631.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2306267843",
+    "id" : "501DA6B5",
+    "lastKnownWriteTime" : 1486065353,
+    "last_content_update" : 1486065353102,
+    "path" : "~/TM/working_wordcloud.R",
+    "project_path" : "working_wordcloud.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
