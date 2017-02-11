@@ -1,6 +1,3 @@
-A line I wrote on my local computer
+Text-mining Simo ir Dariaus bendras projektas:
 
-A line I wrote on my local Rstudio
-
-dar viena parasiau
-fghfgh
+Dabar renkam tweetus apie Donald Trump

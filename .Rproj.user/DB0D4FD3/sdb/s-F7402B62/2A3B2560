@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Text-mining Simo ir Dariaus bendras projektas:\n\nDabar renkam tweetus apie Donald Trump",
+    "created" : 1486851358359.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2503203094",
+    "id" : "2A3B2560",
+    "lastKnownWriteTime" : 1486851436,
+    "last_content_update" : 1486851436349,
+    "path" : "~/TM/README.md",
+    "project_path" : "README.md",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}
