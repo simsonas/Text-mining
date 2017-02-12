@@ -75,7 +75,8 @@ if __name__=="__main__":
         print("If input and output types are the same,rewrites the original file")
         print("If the input file is .rda,we can only overwrite it.\n")
         print("Supported input types: ", " ".join(inp))
-        print("supported output types: "," ".join(formats.keys()))
+        print("supported output types: "," ".join(formats.keys()),"\n")
+        print("THIS IS USELESS - TWITTER HAS DETECTED LANGUOGE IN THE API OUTPUT")
     else:
         fname = sys.argv[1].split('.')
         if ("rda" in fname[-1].lower()):
