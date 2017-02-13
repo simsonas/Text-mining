@@ -11,8 +11,7 @@ from langdetect import detect
 import tablib
 import sys
 
-import dataset
-import pandas as pd
+
 import rpy2.robjects as robj
 from rpy2.robjects import pandas2ri
 
@@ -36,7 +35,7 @@ def main():
     
     lang = lang_det(data['text'])    
     #append the language column
-    data.append_col(lang,header='lang')
+    data.append_col(lang,header='lang2')
     
     #split the filename by dot
     fname = sys.argv[1].split('.')
@@ -53,7 +52,7 @@ def r_main():
     
     lang =lang_det(data.text)
     
-    data['lang']=lang
+    data['lang2']=lang
     
     print(data)
     
