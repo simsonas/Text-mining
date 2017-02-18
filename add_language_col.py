@@ -23,7 +23,10 @@ def lang_det(data):
     #language detection magic
     lang =[]
     for i,tweet in enumerate(data):
-        lang.append(detect(tweet))
+        try:            
+            lang.append(detect(tweet))
+        except:
+            lang.append(None)
         print(i,"/",total,end="\r")
     return lang
 
@@ -46,20 +49,22 @@ def main():
     f.close()
 
 def r_main():
+    print("Loading file.")
     robj.r['load'](sys.argv[1])
-    
+    print("importing object to pandas")
     data = robj.r[sys.argv[2]]
-    
+    print("removing R object.")
+    robj.r['rm'](sys.argv[1])
+    print("lang det")
     lang =lang_det(data.text)
     
     data['lang2']=lang
     
-    print(data)
-    
+    print("exporting from pandas to r")
     robj.globalenv[sys.argv[2]] = data
-
+    del data
     robj.r['save.image'](sys.argv[1])
-
+    
     
 if __name__=="__main__":
     formats=tablib.Dataset()._formats
@@ -74,7 +79,7 @@ if __name__=="__main__":
         print("If input and output types are the same,rewrites the original file")
         print("If the input file is .rda,we can only overwrite it.\n")
         print("Supported input types: ", " ".join(inp))
-        print("supported output types: "," ".join(formats.keys()),"\n")
+        print("supported output types: "," ".join(outp),"\n")
         print("THIS IS USELESS - TWITTER HAS DETECTED LANGUOGE IN THE API OUTPUT")
     else:
         fname = sys.argv[1].split('.')
