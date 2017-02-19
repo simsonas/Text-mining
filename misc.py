@@ -35,13 +35,13 @@ def chunks_from_r(frame,columns=None,chunksize=1000):
     assert nrows!=rpy2.rinterface.NULL
     
     start=1
-    end=start+chunksize-1    
+    end=min(start+chunksize-1,nrows)    
     
     while(start<nrows):            
         chunk = pandas2ri.ri2py(df.slice(str(start)+':'+str(end)))
         yield chunk
         start=end+1
-        end=min(start+chunksize,nrows)
+        end=min(start+chunksize-1,nrows)
 
 
 
