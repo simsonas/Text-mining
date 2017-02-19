@@ -14,8 +14,10 @@ import sys
 
 import rpy2.robjects as robj
 from rpy2.robjects import pandas2ri
+import rpy2.rinterface
 
-pandas2ri.activate()
+import misc
+
 
 def lang_det(data):
     total = len(data)
@@ -27,7 +29,8 @@ def lang_det(data):
             lang.append(detect(tweet))
         except:
             lang.append(None)
-        print(i,"/",total,end="\r")
+        print(i+1,"/",total,end="\r")
+    print()
     return lang
 
 def main():    
@@ -49,21 +52,24 @@ def main():
     f.close()
 
 def r_main():
-    print("Loading file.")
+    #fucking can't make it work with cbind fuck this    
+    from rpy2.robjects.lib.dplyr import DataFrame    
+    print("Loading file...")
     robj.r['load'](sys.argv[1])
-    print("importing object to pandas")
-    data = robj.r[sys.argv[2]]
-    print("removing R object.")
-    robj.r['rm'](sys.argv[1])
-    print("lang det")
-    lang =lang_det(data.text)
     
-    data['lang2']=lang
     
-    print("exporting from pandas to r")
-    robj.globalenv[sys.argv[2]] = data
-    del data
-    robj.r['save.image'](sys.argv[1])
+    lang=[]
+    for i,chunk in enumerate(misc.chunks_from_r(sys.argv[2])):
+        print("Chunk ",i+1)        
+        lang += lang_det(chunk.text)
+    
+    
+    robj.globalenv['tmp']=robj.Vector(map(lambda x:x if x!=None else rpy2.rinterface.NULL,lang))
+    robj.globalenv[sys.argv[2]]=DataFrame(robj.globalenv[sys.argv[2]]).mutate(lang2='tmp')
+    
+    
+    print("Saving...")
+    robj.r.save(sys.argv[2],file=sys.argv[1])
     
     
 if __name__=="__main__":
