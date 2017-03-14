@@ -1,3 +1,6 @@
-Text-mining Simo ir Dariaus bendras projektas:
+######Text-mining Simo ir Dariaus bendras projektas:
 
-Dabar renkam tweetus apie Donald Trump
+- [x] Renkam tweetus apie Donald Trump
+- [x] Upload classified dataset to data.world
+
+[Dataset can be found here](https://data.world/s0nas/donal-trump-tweets-sentiment)
